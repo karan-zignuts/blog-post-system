@@ -49,10 +49,6 @@ Route::middleware('auth')->group(function () {
 
 });
 
-
-
-
-
 // Add comment routes
 Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 Route::get('/comments/{comment}/edit', [CommentController::class, 'edit'])->name('comments.edit');

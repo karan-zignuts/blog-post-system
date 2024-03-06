@@ -52,7 +52,7 @@ class CommentController extends Controller
         $comment->update([
             'content' => $request->content,
         ]);
-
+        // return redirect()->back('posts.show')->with('success', 'Comment updated successfully.');
         return redirect()->back()->with('success', 'Comment updated successfully.');
     }
 
@@ -64,6 +64,6 @@ class CommentController extends Controller
 
         $comment->delete();
 
-        return redirect()->back()->with('success', 'Comment deleted successfully.');
+        return redirect()->back()->with('danger', 'Comment deleted successfully.');
     }
 }

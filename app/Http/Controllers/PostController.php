@@ -19,7 +19,7 @@ class PostController extends Controller
         //     'posts' => DB::table('posts')->paginate(5)
         // ]);
        
-        $posts = Post::orderBy('id', 'DESC')->paginate(5);
+        $posts = Post::orderBy('id', 'DESC')->paginate(6);
         return view('posts.index', compact('posts'));
     }
 

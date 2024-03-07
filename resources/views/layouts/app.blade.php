@@ -11,7 +11,7 @@
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
     <style>
@@ -34,7 +34,7 @@
 </head>
 
 <body>
-    {{-- @include('layouts.navigation') --}}
+   
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="{{ route('posts.index') }}">Blog Post System</a>
@@ -47,11 +47,11 @@
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('posts.index') }}">Home</a>
-                    </li>                    
-                    @auth
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('posts.myposts') }}">Myposts</a>
                     </li>
+                    @auth
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('posts.myposts') }}">Myposts</a>
+                        </li>
                     @endauth
                 </ul>
                 <ul class="navbar-nav">
@@ -64,7 +64,8 @@
                         </li>
                     @else
                         <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a class="nav-link" href="#"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Logout
                             </a>
                         </li>
@@ -73,7 +74,7 @@
                         </form>
                     @endguest
                 </ul>
-                
+
             </div>
         </div>
     </nav>
@@ -111,7 +112,6 @@
         </div>
     </footer>
     <script>
-      
         document.addEventListener('DOMContentLoaded', function() {
             // Delay closing the success message
             setTimeout(function() {
@@ -133,7 +133,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-        
     </script>
 
 </html>

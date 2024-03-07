@@ -34,7 +34,6 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        // $posts = Post::where('title', '>', 100)->cursorPaginate(15);
             $request->validate([
             'title' => 'required',
             'content' => 'required',

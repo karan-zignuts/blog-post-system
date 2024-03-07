@@ -29,8 +29,6 @@
     .glassmorphic {
     background: rgba(255, 255, 255, 0.8);
     border-radius: 15px;
-    /* box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.1),
-                -10px -10px 30px rgba(255, 255, 255, 0.5); */
 }
 
 </style>

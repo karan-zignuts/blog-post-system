@@ -27,13 +27,12 @@
                                     <div class="card-body">
                                         <div class="d-flex justify-content-start align-items-center">
                                             <a href="{{ route('posts.show', $post->id) }}" style="text-decoration:none">
-                                                Read more -->
+                                                Read more <i class="fa-solid fa-arrow-right"></i>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         @empty
                             <div class="col-md-12">
                                 <div class="alert alert-info" role="alert">

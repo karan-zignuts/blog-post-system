@@ -45,23 +45,6 @@
             </div>
         </div>
     @endif
-
-    {{-- <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('viewFullContent').addEventListener('click', function() {
-                document.getElementById('shortenedContent').style.display = 'none';
-                document.getElementById('fullContent').style.display = 'block';
-            });
-        });
-
-        function shortenContent(content) {
-            var words = content.split(' ');
-            if (words.length > 50) {
-                return words.slice(0, 50).join(' ') + '...';
-            }
-            return content;
-        }
-    </script> --}}
 @endsection
 
 <style>

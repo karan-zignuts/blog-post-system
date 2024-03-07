@@ -10,7 +10,7 @@ class CommentController extends Controller
     public function store(Request $request)
     {
     // Check if the user is authenticated
-        if (!Auth::check()) {
+       if (!Auth::check()) {
             return redirect()->back()->with('error', 'You must be logged in to add a comment.');
         }
 
@@ -41,10 +41,11 @@ class CommentController extends Controller
 
     public function update(Request $request, Comment $comment)
     {
+        
         if ($comment->user_id != Auth::id()) {
             return redirect()->back()->with('error', 'You are not authorized to update this comment.');
         }
-
+      
         $request->validate([
             'content' => 'required',
         ]);
@@ -52,10 +53,10 @@ class CommentController extends Controller
         $comment->update([
             'content' => $request->content,
         ]);
+        // dd($comment,Auth::id());
         // return redirect()->back('posts.show');
         // return redirect()->back()->with('success', 'Comment updated successfully.');
         return redirect()->route('posts.show', $comment->post_id)->with('success', 'Comment updated successfully.');
-
 
     }
 

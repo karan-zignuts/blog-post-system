@@ -3,14 +3,31 @@
 
 <head>
     <title>Blog Post System</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
     <style>
         body {
             background: #c9cdd2;
             height: 100%;
+        }
+
+        .footer {
+            position: initial;
+            margin-top: 50px;
+            bottom: 0;
+            width: 100%;
+            background-color: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+            padding: 10px 0;
         }
     </style>
 
@@ -30,7 +47,12 @@
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('posts.index') }}">Home</a>
+                    </li>                    
+                    @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('posts.myposts') }}">Myposts</a>
                     </li>
+                    @endauth
                 </ul>
                 <ul class="navbar-nav">
                     @guest
@@ -42,8 +64,7 @@
                         </li>
                     @else
                         <li class="nav-item">
-                            <a class="nav-link" href="#"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Logout
                             </a>
                         </li>
@@ -52,6 +73,7 @@
                         </form>
                     @endguest
                 </ul>
+                
             </div>
         </div>
     </nav>
@@ -70,42 +92,48 @@
     </div>
 
     <!-- Content Area -->
-    <div class="container mt-4">
+    <div class="container mt-4 w-75">
         @yield('content')
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-RKJ3b0Pxi0I5LtfM4JvN7PcVlGyTq/0Gx1r1QaXepkX6U0aPPZhndDQ1azqL6bUZ" crossorigin="anonymous"></script>
-    <script>
-        // Delay closing the success message
-        setTimeout(function () {
-            document.getElementById('successMessage').style.display = 'none';
-        }, 2000); // Adjust the duration (in milliseconds) as needed
-        // Delay closing the danger message
-        setTimeout(function () {
-            document.getElementById('dangerMessage').style.display = 'none';
-        }, 2000); // Adjust the duration (in milliseconds) as needed
-    </script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
-    <div class="container">
-        <footer
-            class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top fixed-bottom navbar-light bg-light">
-            <div class="col-md-4 d-flex align-items-center">
-                <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                    <svg class="bi" width="30" height="24">
-                        <use xlink:href="#bootstrap"></use>
-                    </svg>
-                </a>
-                <span class="mb-3 mb-md-0 text-muted">© 2022 Company, Inc</span>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 d-flex align-items-center">
+                    <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                        <svg class="bi" width="30" height="24">
+                            <use xlink:href="#bootstrap"></use>
+                        </svg>
+                    </a>
+                    <span class="mb-3 text-muted text-center">© 2022 Company, Inc</span>
+                </div>
             </div>
-        </footer>
-    </div>
+        </div>
+    </footer>
+    <script>
+      
+        document.addEventListener('DOMContentLoaded', function() {
+            // Delay closing the success message
+            setTimeout(function() {
+                var successMessage = document.getElementById('successMessage');
+                if (successMessage) {
+                    successMessage.style.display = 'none';
+                }
+            }, 2000);
 
-</body>
+            // Delay closing the danger message
+            setTimeout(function() {
+                var dangerMessage = document.getElementById('dangerMessage');
+                if (dangerMessage) {
+                    dangerMessage.style.display = 'none';
+                }
+            }, 2000);
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        
+    </script>
 
 </html>

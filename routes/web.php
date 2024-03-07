@@ -47,7 +47,15 @@ Route::middleware('auth')->group(function () {
     // Allow users to delete their own posts
     Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
+    Route::get('/myposts', [PostController::class, 'myposts'])->name('posts.myposts');
+
+
 });
+
+
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show')->withoutMiddleware('auth');
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index')->withoutMiddleware('auth');
+
 
 // Add comment routes
 Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');

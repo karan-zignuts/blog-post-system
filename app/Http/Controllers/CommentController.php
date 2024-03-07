@@ -52,8 +52,11 @@ class CommentController extends Controller
         $comment->update([
             'content' => $request->content,
         ]);
-        // return redirect()->back('posts.show')->with('success', 'Comment updated successfully.');
-        return redirect()->back()->with('success', 'Comment updated successfully.');
+        // return redirect()->back('posts.show');
+        // return redirect()->back()->with('success', 'Comment updated successfully.');
+        return redirect()->route('posts.show', $comment->post_id)->with('success', 'Comment updated successfully.');
+
+
     }
 
     public function destroy(Comment $comment)

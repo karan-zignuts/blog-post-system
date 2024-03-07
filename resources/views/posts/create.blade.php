@@ -17,16 +17,52 @@
                         </div>
                         <div class="form-group">
                             <label for="content">Content</label>
-                            <textarea class="form-control" id="content" name="content" rows="3"></textarea>
-                        </div>
+                            <textarea class="form-control" id="content" name="content" rows="5"></textarea>
+                        </div> <br>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-@endsection
 
+    @if(isset($post))
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="content-box shadow p-4">
+                        <h2>Post Details</h2>
+                        <p><strong>Title:</strong> {{ $post->title }}</p>
+                        <div id="shortenedContent">
+                            <p><strong>Content:</strong> {{ shortenContent($post->content) }}</p>
+                            <button id="viewFullContent" class="btn btn-link">View Full Content</button>
+                        </div>
+                        <div id="fullContent" style="display: none;">
+                            <p><strong>Content:</strong> {{ $post->content }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    {{-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('viewFullContent').addEventListener('click', function() {
+                document.getElementById('shortenedContent').style.display = 'none';
+                document.getElementById('fullContent').style.display = 'block';
+            });
+        });
+
+        function shortenContent(content) {
+            var words = content.split(' ');
+            if (words.length > 50) {
+                return words.slice(0, 50).join(' ') + '...';
+            }
+            return content;
+        }
+    </script> --}}
+@endsection
 
 <style>
 .content-box {
@@ -38,3 +74,5 @@
 }
 
 </style>
+
+{{-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas saepe tenetur, exercitationem sed ducimus corporis tempora earum soluta aperiam inventore blanditiis illum nemo iure aliquam veritatis expedita ratione. Blanditiis, debitis.2 --}}

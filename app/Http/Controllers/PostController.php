@@ -8,17 +8,13 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 
 class PostController extends Controller
 {
       public function index(): View
-    {
-        // dd('hii');
-        // return view('posts.index', [
-        //     'posts' => DB::table('posts')->paginate(5)
-        // ]);
-       
+    {     
         $posts = Post::orderBy('id', 'DESC')->paginate(6);
         return view('posts.index', compact('posts'));
     }
@@ -80,5 +76,11 @@ class PostController extends Controller
         // : RedirectResponse
         $post->delete();
         return redirect()->route('posts.index')->with('danger', 'Post deleted successfully');
+    }
+
+    public function myposts(): View
+    {     
+        $posts = Post::orderBy('id', 'DESC')->paginate(6);
+        return view('posts.myposts', compact('posts'));
     }
 }

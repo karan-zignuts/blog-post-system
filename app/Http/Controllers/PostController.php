@@ -30,23 +30,25 @@ class PostController extends Controller
     {
         return view('posts.create');
     }
-  
 
     public function store(Request $request)
     {
-            $request->validate([
+        // Validate the request data
+        $validatedData = $request->validate([
             'title' => 'required',
             'content' => 'required',
         ]);
 
-        $post = new Post();
-        $post->title = $request->title;
-        $post->content = $request->content;
-        $post->user_id = auth()->id();
-        $post->save();
+        // Create a new post using Eloquent's create method
+        $post = Post::create([
+            'title' => $validatedData['title'],
+            'content' => $validatedData['content'],
+            'user_id' => auth()->id(),
+        ]);
 
         return redirect()->route('posts.index')->with('success', 'Post created successfully');
     }
+
 
     // Allow users to edit their own posts
     public function edit(Post $post): View

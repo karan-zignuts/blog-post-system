@@ -22,17 +22,20 @@
                             <a href="{{ route('comments.edit', $comment->id) }}" class="btn btn-sm btn-primary"><i
                                     class="fas fa-pencil-alt"></i>
                             </a>
-
                         @endif
                         @if ($comment->user_id == auth()->id())
-                            <form action="{{ route('comments.destroy', $comment->id) }}" method="POST"
-                                style="display: inline-block;">
+                            <form id="deleteForm_{{ $comment->id }}" action="{{ route('comments.destroy', $comment->id) }}"
+                                method="POST" style="display: inline-block;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger"><i
-                                        class="fas fa-trash-alt"></i></button>
+                                <button type="button" class="btn btn-sm btn-danger"
+                                    onclick="confirmDelete({{ $comment->id }})">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
                             </form>
                         @endif
+
+
                     </div>
                 </div>
             @endforeach
@@ -67,4 +70,22 @@
             margin-top: 20px;
         }
     </style>
+    <script>
+        function confirmDelete(commentId) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this comment!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If confirmed, submit the form for comment deletion
+                    document.getElementById('deleteForm_' + commentId).submit();
+                }
+            });
+        }
+    </script>
 @endsection
